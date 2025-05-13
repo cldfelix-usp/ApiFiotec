@@ -89,6 +89,9 @@ namespace ApiFiotec
             builder.Services.AddScoped<ISolicitanteRepository, SolicitanteRepository>();
             builder.Services.AddScoped<ISolicitanteService, SolicitanteService>();
 
+            builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
+            builder.Services.AddScoped<IRelatoriosService, RelatorioService>();
+
 
             var app = builder.Build();
 

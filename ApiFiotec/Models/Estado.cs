@@ -7,14 +7,14 @@ namespace ApiFiotec.Models
     public class Estado
     {
 
-            [Key]
-            [Column("id")]
-            public ushort Id { get; set; }
-            
-            [Required]
-            [StringLength(100)]
-            [Column("uf")]
-            public string NomeUf { get; set; }
-            public IEnumerable<Municipio> Municipios { get; set; }
+        [Key]
+        [Column("id")]
+        public ushort Id { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Column("uf")]
+        public string NomeUf { get; set; }
+        public IEnumerable<Municipio> Municipios { get; set; }
     }
 }

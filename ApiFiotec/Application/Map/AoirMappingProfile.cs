@@ -17,6 +17,8 @@ namespace ApiFiotec.Application.Map
             
             // Requests
             CreateMap<SolicitanteRequestViewModel, Solicitante>();
+            CreateMap<RelatorioRequestViewModel, Relatorio>();
+            
         }
     }
 }
