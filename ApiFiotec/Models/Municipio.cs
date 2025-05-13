@@ -14,6 +14,6 @@ public class Municipio
     [Required]
     [StringLength(100)]
     [Column("municipio")]
-    public string NomeMunicipio { get; set; }
-    public Estado Estado { get; set; }
+    public required string NomeMunicipio { get; set; }
+    public required Estado Estado { get; set; }
 }

@@ -14,7 +14,7 @@ namespace ApiFiotec.Models
         [Required]
         [StringLength(100)]
         [Column("uf")]
-        public string NomeUf { get; set; }
-        public IEnumerable<Municipio> Municipios { get; set; }
+        public required string NomeUf { get; set; }
+        public required IEnumerable<Municipio> Municipios { get; set; }
     }
 }

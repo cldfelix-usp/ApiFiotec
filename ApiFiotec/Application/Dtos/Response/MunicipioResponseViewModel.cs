@@ -3,6 +3,6 @@
 public class MunicipioResponseViewModel
 {
     public uint Id { get; set; }
-    public string NomeMunicipio{ get; set; }
-    public EstadoResponseViewModel Estado { get; set; }
+    public required string NomeMunicipio{ get; set; }
+    public required EstadoResponseViewModel Estado { get; set; }
 }

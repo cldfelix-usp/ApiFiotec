@@ -16,9 +16,9 @@ public class EstadosService : IEstadosService
         _mapper = mapper;
     }
 
-    public async Task<List<EstadoResponseViewModel>> PegarTodosEstados()
+    public async Task<List<EstadoResponseViewModel>> PegarTodosEstados(CancellationToken cancellationToken)
     {
-        IEnumerable<Estado> estados = await _estadosRepository.PegarTodosEstados();
+        IEnumerable<Estado> estados = await _estadosRepository.PegarTodosEstados(cancellationToken);
 
         var mapped = _mapper.Map<List<EstadoResponseViewModel>>(estados);
 

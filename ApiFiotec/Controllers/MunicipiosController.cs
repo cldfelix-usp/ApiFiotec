@@ -17,18 +17,20 @@ public class MunicipiosController : ControllerBase
 
     [HttpGet]
     [Route("pegarTodosMunicipios")]
-    public async Task<IActionResult> PegarTodosMunicipios(bool cancelationToken = false)
+    public async Task<IActionResult> PegarTodosMunicipios(CancellationToken cancelationToken = default)
     {
-        var municipios = await _municipiosService.PegarTodosMunicipios();
+        var municipios = await _municipiosService.PegarTodosMunicipios(cancelationToken);
         return Ok(new  BaseResponseViewModel<List<MunicipioResponseViewModel>>(municipios));
     }
+
         
     [HttpGet]
     [Route( "pegarTodosMunicipiosPorEstadoAsync/{estadoId}")]
-    public async Task<IActionResult> PegarTodosMunicipiosPorEstadoAsync([FromRoute] uint estadoId)
+    public async Task<IActionResult> PegarTodosMunicipiosPorEstadoAsync([FromRoute] uint estadoId, CancellationToken cancelationToken = default)
     {
-        var municipios = await _municipiosService.PegarTodosMunicipiosPorEstadoAsync(estadoId, false);
+        var municipios = await _municipiosService.PegarTodosMunicipiosPorEstadoAsync(estadoId, cancelationToken);
         return Ok(new  BaseResponseViewModel<List<MunicipioResponseViewModel>>(municipios));
     }
+
 
 }

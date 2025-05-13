@@ -8,5 +8,4 @@ public interface IInfoDengueService
     Task<IEnumerable<AlertCityResponseViewModel>> GetAlertCityAsync(InfoDengueRequestFilterRequestViewModel filter);
 
     Task<string> GetAlertCityRawAsync(InfoDengueRequestFilterRequestViewModel filter);
-    Task<IEnumerable<AlertCityResponseViewModel>> GetDadosPorCodigoIbge(ListarDadosPorCodigoRquestViewModel filter);
 }

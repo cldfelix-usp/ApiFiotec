@@ -36,13 +36,13 @@ public class AlertCityResponseViewModel
         public int Nivel { get; set; }
 
         [JsonPropertyName("id")]
-        public object Id { get; set; }
+        public required object Id { get; set; }
 
         [JsonPropertyName("versao_modelo")]
-        public string VersaoModelo { get; set; }
+        public required string VersaoModelo { get; set; }
 
         [JsonPropertyName("tweet")]
-        public object Tweet { get; set; }
+        public required object Tweet { get; set; }
 
         [JsonPropertyName("Rt")]
         public double Rt { get; set; }
@@ -81,16 +81,16 @@ public class AlertCityResponseViewModel
         public int Casprov { get; set; }
 
         [JsonPropertyName("casprov_est")]
-        public object CasprovEst { get; set; }
+        public required object CasprovEst { get; set; }
 
         [JsonPropertyName("casprov_est_min")]
-        public object CasprovEstMin { get; set; }
+        public required object CasprovEstMin { get; set; }
 
         [JsonPropertyName("casprov_est_max")]
-        public object CasprovEstMax { get; set; }
+        public required object CasprovEstMax { get; set; }
 
         [JsonPropertyName("casconf")]
-        public object Casconf { get; set; }
+        public required object Casconf { get; set; }
 
         [JsonPropertyName("notif_accum_year")]
         public int NotifAccumYear { get; set; }

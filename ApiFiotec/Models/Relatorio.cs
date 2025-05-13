@@ -9,8 +9,7 @@ namespace ApiFiotec.Models
     {
         [Key]
         [Column("id")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         [Column("data")]
@@ -21,11 +20,12 @@ namespace ApiFiotec.Models
         [Required]
         [Column("arbovirose")]
         [StringLength(100)]
-        public string Arbovirose { get; set; }
+        public required string Arbovirose { get; set; }
 
         [Required]
-        [Column("solicitante_id")]
-        public Solicitante Solicitante { get; set; }
+        [Column("solicitanteId")]
+        public Guid SolicitanteId { get; set; }
+        public virtual required Solicitante Solicitante { get; set; }
 
         [Required]
         [Column("semana_inicio")]
@@ -44,11 +44,11 @@ namespace ApiFiotec.Models
         [Required]
         [Column("municipio")]
         [StringLength(100)]
-        public string Municipio { get; set; }
+        public required string Municipio { get; set; }
 
         [Required]
         [Column("dados_relatorio")]
-        public string DadosRelatorio { get; set; }
+        public required string DadosRelatorio { get; set; }
 
     }
 }

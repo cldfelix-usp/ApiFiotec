@@ -3,5 +3,5 @@
 public class EstadoResponseViewModel
 {
     public ushort Id { get; set; }
-    public string NomeUf { get; set; }
+    public required string NomeUf { get; set; }
 }

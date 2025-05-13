@@ -19,17 +19,16 @@ public class MunicipiosService : IMunicipiosService
 
 
 
-    public async Task<List<MunicipioResponseViewModel>> PegarTodosMunicipios()
+    public async Task<List<MunicipioResponseViewModel>> PegarTodosMunicipios(CancellationToken cancellationToken)
     {
-        var municipios = await _municipiosRepository.PegarTodosMunicipios();
+        var municipios = await _municipiosRepository.PegarTodosMunicipios(cancellationToken);
         var mapped = _mapper.Map<List<MunicipioResponseViewModel>>(municipios);
         return mapped;
-
     }
-
-    public async Task<List<MunicipioResponseViewModel>> PegarTodosMunicipiosPorEstadoAsync(uint estadoId, bool cancelationToken)
+   
+    public async Task<List<MunicipioResponseViewModel>> PegarTodosMunicipiosPorEstadoAsync(uint estadoId, CancellationToken cancelationToken)
     {
-      List<Municipio> municipios  = await _municipiosRepository.PegarTodosMunicipiosPorEstadoAsync(estadoId, cancelationToken);
+      var municipios  = await _municipiosRepository.PegarTodosMunicipiosPorEstadoAsync(estadoId, cancelationToken);
       var mapped = _mapper.Map<List<MunicipioResponseViewModel>>(municipios);
       return mapped;
       

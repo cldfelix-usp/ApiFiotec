@@ -14,6 +14,8 @@ namespace ApiFiotec.Application.Map
             CreateMap<Estado, EstadoResponseViewModel>();
             CreateMap<Municipio, MunicipioResponseViewModel>();
             CreateMap<Solicitante, SolicitanteResponseViewModel>();
+            CreateMap<SolicitanteResponseViewModel, Solicitante>();
+            CreateMap<Relatorio, RelatorioResponseViewModel>();
             
             // Requests
             CreateMap<SolicitanteRequestViewModel, Solicitante>();

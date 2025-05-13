@@ -8,8 +8,8 @@ public class SolicitanteRequestViewModel
   
 
 
-    public string Cpf { get; set; }
-    public string Nome { get; set; }
+    public required string Cpf { get; set; }
+    public required string Nome { get; set; }
 
     public void Validade()
     {
@@ -24,8 +24,8 @@ public class SolicitanteRequestViewModel
         int[] multiplicadores1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
         int[] multiplicadores2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
-        int digito1 = CalcularDigito(Cpf.Substring(0, 9), multiplicadores1);
-        int digito2 = CalcularDigito(Cpf.Substring(0, 10), multiplicadores2);
+        var digito1 = CalcularDigito(Cpf.Substring(0, 9), multiplicadores1);
+        var digito2 = CalcularDigito(Cpf.Substring(0, 10), multiplicadores2);
 
         if(!Cpf.EndsWith($"{digito1}{digito2}"))
             throw new ArgumentException("Cpf invalido, formeca um numero valido", nameof(Cpf));
@@ -43,8 +43,8 @@ public class SolicitanteRequestViewModel
 
     private static int CalcularDigito(string cpfParcial, int[] multiplicadores)
     {
-        int soma = cpfParcial.Select((c, i) => (c - '0') * multiplicadores[i]).Sum();
-        int resto = soma % 11;
+        var soma = cpfParcial.Select((c, i) => (c - '0') * multiplicadores[i]).Sum();
+        var resto = soma % 11;
         return resto < 2 ? 0 : 11 - resto;
     }
 

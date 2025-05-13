@@ -6,7 +6,7 @@ using AutoMapper;
 
 namespace ApiFiotec.Services;
 
-public class SolicitanteService: ISolicitanteService
+public class SolicitanteService : ISolicitanteService
 {
     private readonly IMapper _mapper;
     private readonly ISolicitanteRepository _solicitanteRepository;
@@ -17,34 +17,54 @@ public class SolicitanteService: ISolicitanteService
         _solicitanteRepository = solicitanteRepository;
     }
 
-    public async Task<SolicitanteResponseViewModel?> PegarSolicitantePorCpf(string cpf)
+    public async Task<SolicitanteResponseViewModel?> PegarSolicitantePorCpf(string cpf, CancellationToken cancellationToken)
     {
-        var solicitante = await _solicitanteRepository.PegarSolicitantePorCpf(cpf);
-        var mapped = _mapper.Map<SolicitanteResponseViewModel>(solicitante);
-        return mapped;
+        if (string.IsNullOrEmpty(cpf))
+            return null;
+
+        cpf = cpf.Trim();
+
+        if (cpf.Length != 11)
+            return null;
+
+        var solicitante = await _solicitanteRepository.PegarSolicitantePorCpf(cpf, cancellationToken);
+        return _mapper.Map<SolicitanteResponseViewModel>(solicitante);
     }
 
-    public async Task<bool> SolicitanteJaCadastrado(string cpf)
+
+    public async Task<bool> SolicitanteJaCadastrado(string cpf, CancellationToken cancellationToken)
     {
-        return await _solicitanteRepository.SolicitanteJaCadastrado(cpf);
+        if (string.IsNullOrEmpty(cpf))
+            return false;
+
+        cpf = cpf.Trim();
+
+        if (cpf.Length != 11)
+            return false;
+
+        return await _solicitanteRepository.SolicitanteJaCadastrado(cpf, cancellationToken);
     }
 
-    public async Task<List<SolicitanteResponseViewModel>> PegarTodosSolicitantes()
+    public async Task<List<SolicitanteResponseViewModel>> PegarTodosSolicitantes(CancellationToken cancellationToken)
     {
-        var solicitantes = await _solicitanteRepository.PegarTodosSolicitantes();
+        // Se não houver solicitação de cancelamento, continue com a execução normal
+        var solicitantes =  await _solicitanteRepository.PegarTodosSolicitantes(cancellationToken);
         var mapped = _mapper.Map<List<SolicitanteResponseViewModel>>(solicitantes);
         return mapped;
     }
 
-    public async Task<SolicitanteResponseViewModel> CadastrarSolicitante(string cpf, string nome)
+
+    public async Task<SolicitanteResponseViewModel> CadastrarSolicitante(string cpf, string nome, CancellationToken cancellationToken)
     {
-        var solicitante = new Solicitante
+  
+        var mappedSolicitante = _mapper.Map<Solicitante>(new SolicitanteRequestViewModel
         {
             Cpf = cpf,
             Nome = nome
-        };
-        
-        var solicitanteMapped  = await _solicitanteRepository.CadastrarSolicitante(solicitante);
+        });
+
+
+        var solicitanteMapped = await _solicitanteRepository.CadastrarSolicitante(mappedSolicitante, cancellationToken);
         var mapped = _mapper.Map<SolicitanteResponseViewModel>(solicitanteMapped);
         return mapped;
     }

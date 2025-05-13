@@ -3,6 +3,7 @@ using System;
 using ApiFiotec.Infraestruture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -11,26 +12,32 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiFiotec.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250513134015_relatorios")]
-    partial class relatorios
+    [Migration("20250513205331_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.4");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "9.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("ApiFiotec.Models.Estado", b =>
                 {
-                    b.Property<ushort>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("NomeUf")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("uf");
 
                     b.HasKey("Id");
@@ -40,18 +47,20 @@ namespace ApiFiotec.Migrations
 
             modelBuilder.Entity("ApiFiotec.Models.Municipio", b =>
                 {
-                    b.Property<uint>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    b.Property<ushort>("EstadoId")
-                        .HasColumnType("INTEGER");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("EstadoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("NomeMunicipio")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("municipio");
 
                     b.HasKey("Id");
@@ -65,44 +74,45 @@ namespace ApiFiotec.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
                     b.Property<string>("Arbovirose")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("arbovirose");
 
                     b.Property<int>("CodigoIbge")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("codigo_ibge");
 
                     b.Property<string>("DadosRelatorio")
                         .IsRequired()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("dados_relatorio");
 
                     b.Property<DateTime>("Data")
-                        .HasColumnType("TEXT")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data");
 
                     b.Property<string>("Municipio")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("municipio");
 
                     b.Property<int>("SemanaInicio")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("semana_inicio");
 
                     b.Property<int>("SemanaTermino")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("semana_termino");
 
                     b.Property<Guid>("SolicitanteId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("solicitanteId");
 
                     b.HasKey("Id");
 
@@ -115,19 +125,19 @@ namespace ApiFiotec.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(11)")
                         .HasColumnName("cpf");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("TEXT")
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("nome");
 
                     b.HasKey("Id");

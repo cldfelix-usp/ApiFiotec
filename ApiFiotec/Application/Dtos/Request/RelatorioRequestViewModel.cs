@@ -1,3 +1,4 @@
+using ApiFiotec.Enums;
 using ApiFiotec.Models;
 
 namespace ApiFiotec.Application.Dtos.Request;
@@ -6,9 +7,9 @@ public class RelatorioRequestViewModel
 {
         public DateTime Data { get; private set; } = DateTime.Now;
 
-        public string Arbovirose { get; set; }
+        public DiseaseType Arbovirose { get; set; }
 
-        public Solicitante Solicitante { get; set; }
+        public Guid SolicitanteId { get; set; }
 
         public int SemanaInicio { get; set; }
 
@@ -16,7 +17,7 @@ public class RelatorioRequestViewModel
 
         public int CodigoIbge { get; set; }
 
-        public string Municipio { get; set; }
+        public required string Municipio { get; set; }
 
-        public string DadosRelatorio { get; set; }
+        public required string DadosRelatorio { get; set; }
 }

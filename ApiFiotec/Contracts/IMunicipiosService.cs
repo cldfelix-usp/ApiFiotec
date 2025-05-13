@@ -4,6 +4,6 @@ namespace ApiFiotec.Contracts;
 
 public interface IMunicipiosService
 {
-    Task<List<MunicipioResponseViewModel>> PegarTodosMunicipios();
-    Task<List<MunicipioResponseViewModel>> PegarTodosMunicipiosPorEstadoAsync(uint estadoId, bool cancelationToken);
+    Task<List<MunicipioResponseViewModel>> PegarTodosMunicipios(CancellationToken cancellationToken);
+    Task<List<MunicipioResponseViewModel>> PegarTodosMunicipiosPorEstadoAsync(uint estadoId, CancellationToken cancelationToken);
 }

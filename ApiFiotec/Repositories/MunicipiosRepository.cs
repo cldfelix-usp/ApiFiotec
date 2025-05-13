@@ -14,17 +14,21 @@ public class MunicipiosRepository : IMunicipiosRepository
         _context = context;
     }
 
-    public async Task<List<Municipio>> PegarTodosMunicipios()
+    public async Task<List<Municipio>> PegarTodosMunicipios( CancellationToken cancelationToken)
     {
-        var municipios = await _context.Municipios.ToListAsync();
+        var municipios = await _context.Municipios
+        .AsNoTracking()
+        .ToListAsync(cancelationToken);
         return municipios;
-
     }
 
-    public async Task<List<Municipio>> PegarTodosMunicipiosPorEstadoAsync(uint estadoId, bool cancelationToken)
+
+    public async Task<List<Municipio>> PegarTodosMunicipiosPorEstadoAsync(uint estadoId, CancellationToken cancellationToken)
     {
         var municipios = await 
-            _context.Municipios.Where(x => x.Estado.Id == estadoId).ToListAsync();
+            _context.Municipios
+            .AsNoTracking()
+            .Where(x => x.Estado.Id == estadoId).ToListAsync();
         
         return municipios;
     }

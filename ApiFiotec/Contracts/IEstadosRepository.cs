@@ -4,6 +4,6 @@ namespace ApiFiotec.Contracts
 {
     public interface IEstadosRepository
     {
-        Task<List<Estado>> PegarTodosEstados();
+        Task<List<Estado>> PegarTodosEstados(CancellationToken cancellationToken);
     }
 }

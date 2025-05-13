@@ -1,6 +1,7 @@
 using ApiFiotec.Contracts;
 using ApiFiotec.Infraestruture.Data;
 using ApiFiotec.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiFiotec.Repositories;
 
@@ -13,10 +14,17 @@ public class RelatorioRepository : IRelatorioRepository
         _context = context;
     }
 
-    public async Task<Relatorio> CriarRelatorioAsync(Relatorio relatorio)
+    public async Task<Relatorio> CriarRelatorioAsync(Relatorio relatorio, CancellationToken cancellationToken)
     {
-        _context.Relatorios.Add(relatorio);
+        await _context.Relatorios.AddAsync(relatorio, cancellationToken);
         await _context.SaveChangesAsync();
         return relatorio;
+    }
+
+    public async Task<IEnumerable<Relatorio>> GetRelatoriosAsync(CancellationToken cancellationToken)
+    {
+        return await _context.Relatorios
+        .AsNoTracking()
+        .ToListAsync(cancellationToken);
     }
 }

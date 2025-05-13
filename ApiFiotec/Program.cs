@@ -39,18 +39,17 @@ namespace ApiFiotec
                 }
             });
 
-
-
             // Configurar banco de dados
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Configurar CORS
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder
+                        .AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                 });
@@ -60,7 +59,6 @@ namespace ApiFiotec
             builder.Services.AddResponseCaching();
 
             // Add services to the container.
-            // Adicionar servi�os ao container
             builder.Services.AddControllers()
                 .ConfigureApiBehaviorOptions(options =>
                 {
@@ -68,15 +66,12 @@ namespace ApiFiotec
                 })
                 .AddJsonOptions(options =>
                 {
-                    // remove null values
                     options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
-                    //options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-                    //options.JsonSerializerOptions.WriteIndented = true;
-
                 });
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
 
             builder.Services.AddHttpClient<IInfoDengueService, InfoDengueService>();
             
@@ -90,7 +85,9 @@ namespace ApiFiotec
             builder.Services.AddScoped<ISolicitanteService, SolicitanteService>();
 
             builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
-            builder.Services.AddScoped<IRelatoriosService, RelatorioService>();
+            builder.Services.AddScoped<IRelatorioService, RelatorioService>();
+            
+       
 
 
             var app = builder.Build();

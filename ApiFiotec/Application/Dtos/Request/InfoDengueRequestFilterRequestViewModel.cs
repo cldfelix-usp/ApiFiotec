@@ -4,7 +4,7 @@ namespace ApiFiotec.Application.Dtos.Request;
 
 public class InfoDengueRequestFilterRequestViewModel
 {
-    public SolicitanteRequestViewModel Solicitante { get; set; }
+    public Guid SolicitanteId { get; set; }
     
     public string GeoCode { get; set; } = null!;
 
@@ -46,7 +46,7 @@ public class InfoDengueRequestFilterRequestViewModel
     {
         Validate();
 
-        string diseaseStr = Arbovirose.ToString().ToLower();
+        var diseaseStr = Arbovirose.ToString().ToLower();
 
         return $"geocode={GeoCode}" +
                $"&disease={diseaseStr}" +

@@ -5,6 +5,6 @@ namespace ApiFiotec.Contracts
 {
     public interface IEstadosService
     {
-        Task<List<EstadoResponseViewModel>> PegarTodosEstados();
+        Task<List<EstadoResponseViewModel>> PegarTodosEstados(CancellationToken cancellationToken);
     }
 }

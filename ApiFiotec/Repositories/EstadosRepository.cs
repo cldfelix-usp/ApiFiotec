@@ -14,9 +14,11 @@ public class EstadosRepository : IEstadosRepository
         _context = context;
     }
 
-    public async Task<List<Estado>> PegarTodosEstados()
+    public async Task<List<Estado>> PegarTodosEstados(CancellationToken cancellationToken)
     {
-        var estados = await _context.Estados.ToListAsync();
+        var estados = await _context.Estados
+        .AsNoTracking()
+        .ToListAsync(cancellationToken);
         return estados;
     }
 }
