@@ -1,0 +1,6 @@
+@ApiFiotec_HostAddress = http://localhost:5119
+
+GET {{ApiFiotec_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
